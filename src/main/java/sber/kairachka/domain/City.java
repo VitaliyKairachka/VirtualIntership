@@ -1,4 +1,4 @@
-package sber.kairachka;
+package sber.kairachka.domain;
 
 import java.util.Objects;
 
