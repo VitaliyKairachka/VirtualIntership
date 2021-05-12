@@ -13,8 +13,7 @@ public class Parser {
     public static List<City> scannerCities(String file) {
         List<City> cities = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(Paths.get(
-                    ClassLoader.getSystemResource(file).toURI()));
+            Scanner scanner = new Scanner(Paths.get(ClassLoader.getSystemResource(file).toURI()));
             while (scanner.hasNext()) {
                 Scanner scannerLine = new Scanner(scanner.nextLine());
                 scannerLine.useDelimiter(";");
