@@ -53,15 +53,21 @@ public class ParserTest {
     }
 
     @Test
-    public void scannerCities() {
+    public void scannerCitiesCorrectFile() {
         assertEquals(testList, Parser.scannerCities("testCities.txt"));
+    }
 
+    @Test
+    public void scannerCitiesIncorrectLine() {
         Parser.scannerCities("incorrectLineCities.txt");
         assertEquals("Some lines are incorrect",
                 outputStream.toString().trim(),
                 "Bad file should be handled");
         outputStream.reset();
+    }
 
+    @Test
+    public void scannerCitiesNoSuchFile() {
         Parser.scannerCities("NonExistingFile.txt");
         assertEquals("There is no such file"
                 , outputStream.toString().trim()
