@@ -1,6 +1,7 @@
 package sber.kairachka;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -9,7 +10,7 @@ public class Main {
         List<City> cities = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(Paths.get(
-                    Objects.requireNonNull(Main.class.getClassLoader().getResource(file).getPath())));
+                    ClassLoader.getSystemResource(file).toURI()));
             while (scanner.hasNext()) {
                 Scanner scannerLine = new Scanner(scanner.nextLine());
                 scannerLine.useDelimiter(";");
@@ -27,7 +28,7 @@ public class Main {
             System.out.println("No such file should be handled");
         } catch (NumberFormatException e) {
             System.out.println("Bad file should be handled");
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
         return cities;
