@@ -13,26 +13,24 @@ public class Searcher {
         this.cities = cities;
     }
 
-    public void getAllCities() {
-        for (City city : cities) {
-            System.out.println(city);
-        }
+    public List<City> getAllCities() {
+        return cities;
     }
 
-    public void getMaxPopulation() {
+    public long[] getMaxPopulation() {
         City[] cityArray = cities.toArray(City[]::new);
         long populationMax = 0;
-        int indexMax = 0;
+        long indexMax = 0;
         for (int i = 0; i < cityArray.length; i++) {
             if (cityArray[i].getPopulation() > populationMax) {
                 populationMax = cityArray[i].getPopulation();
                 indexMax = i;
             }
         }
-        System.out.println("[" + indexMax + "]" + " = " + populationMax);
+        return new long[]{indexMax, populationMax};
     }
 
-    public void getRegionsCount() {
+    public Map<String, Integer> getRegionsCount() {
         Map<String, Integer> regions = new TreeMap<>();
         for (City city : cities) {
             if (!regions.containsKey(city.getRegion())) {
@@ -41,8 +39,6 @@ public class Searcher {
                 regions.put(city.getRegion(), regions.get(city.getRegion()) + 1);
             }
         }
-        for (Map.Entry<String, Integer> entry : regions.entrySet()) {
-            System.out.println(entry.getKey() + " - " + entry.getValue());
-        }
+        return regions;
     }
 }

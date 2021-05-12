@@ -11,6 +11,7 @@ public class Menu {
         List<City> cities = Parser.scannerCities("cities.txt");
         Sorter sorter = new Sorter(cities);
         Searcher searcher = new Searcher(cities);
+        Printer printer = new Printer();
         Scanner scan = new Scanner(System.in);
         int x;
         String s = "";
@@ -27,26 +28,24 @@ public class Menu {
                 x = Integer.parseInt(s);
                 switch (x) {
                     case 1:
-                        searcher.getAllCities();
+                        printer.print(searcher.getAllCities());
                         break;
                     case 2:
-                        sorter.getSortedCitiesByName();
+                        printer.print(sorter.getSortedCitiesByName());
                         break;
                     case 3:
-                        sorter.getSortedCitiesByDistrictAndName();
+                        printer.print(sorter.getSortedCitiesByDistrictAndName());
                         break;
                     case 4:
-                        searcher.getMaxPopulation();
+                        printer.print(searcher.getMaxPopulation());
                         break;
                     case 5:
-                        searcher.getRegionsCount();
+                        printer.print(searcher.getRegionsCount());
                         break;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Неверный ввод");
             }
-
-
         }
         System.out.println("До свидания!");
     }

@@ -12,17 +12,13 @@ public class Sorter {
         this.cities = cities;
     }
 
-    public void getSortedCitiesByName() {
+    public List<City> getSortedCitiesByName() {
         cities.sort(Comparator.comparing(City::getName));
-        for (City city : cities) {
-            System.out.println(city);
-        }
+        return cities;
     }
 
-    public void getSortedCitiesByDistrictAndName() {
+    public List<City> getSortedCitiesByDistrictAndName() {
         cities.sort(Comparator.comparing(City::getDistrict).thenComparing(City::getName));
-        for (City city : cities) {
-            System.out.println(city);
-        }
+        return cities;
     }
 }
