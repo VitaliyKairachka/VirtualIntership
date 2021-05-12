@@ -3,12 +3,12 @@ package sber.kairachka;
 import java.util.Objects;
 
 public class City {
-    long id;
-    String name;
-    String region;
-    String district;
-    long population;
-    int foundation;
+    private long id;
+    private String name;
+    private String region;
+    private String district;
+    private long population;
+    private int foundation;
 
     public City() {
     }
