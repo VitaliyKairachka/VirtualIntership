@@ -12,7 +12,7 @@ public class Menu {
 
     public static void start() {
         PropertiesManager propertiesManager = new PropertiesManager();
-        List<City> cities = Parser.scannerCities("cities.txt");
+        List<City> cities = Parser.scannerCities(propertiesManager.getFile());
         Sorter sorter = new Sorter(cities);
         Searcher searcher = new Searcher(cities);
         Printer printer = new Printer();
