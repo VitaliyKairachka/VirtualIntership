@@ -4,6 +4,7 @@ import sber.kairachka.domain.City;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Printer {
     public Printer() {
@@ -23,5 +24,15 @@ public class Printer {
         for (Map.Entry<String, Integer> entry : regions.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
+    }
+
+    public void print (boolean b) {
+        if (b = true) {
+            System.out.println("Операция выполнена");
+        } else System.out.println("Ошибка выполнения операции");
+    }
+
+    public void print (Optional<City> city) {
+        System.out.println(city);
     }
 }

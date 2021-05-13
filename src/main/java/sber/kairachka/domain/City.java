@@ -13,6 +13,14 @@ public class City {
     public City() {
     }
 
+    public City(String name, String region, String district, long population, int foundation) {
+        this.name = name;
+        this.region = region;
+        this.district = district;
+        this.population = population;
+        this.foundation = foundation;
+    }
+
     public City(long id, String name, String region, String district, long population, int foundation) {
         this.id = id;
         this.name = name;
