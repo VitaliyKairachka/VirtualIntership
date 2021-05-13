@@ -5,17 +5,18 @@ import sber.kairachka.repository.CityRepository;
 
 import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Menu {
 
     public static void start() {
+        PropertiesManager propertiesManager = new PropertiesManager();
         List<City> cities = Parser.scannerCities("cities.txt");
         Sorter sorter = new Sorter(cities);
         Searcher searcher = new Searcher(cities);
         Printer printer = new Printer();
-        CityRepository cityRepository = new CityRepository(
-                "jdbc:h2:/Users/a19189097/IdeaProjects/VirtualIntership/src/main/resources/cities;MV_STORE=false");
+        CityRepository cityRepository = new CityRepository(propertiesManager.getUrl());
         Scanner scan = new Scanner(System.in);
         int x;
         String s = "";
