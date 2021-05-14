@@ -3,10 +3,7 @@ package sber.kairachka.repository;
 import org.junit.Before;
 import org.junit.Test;
 import sber.kairachka.domain.City;
-import sber.kairachka.service.Printer;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +66,7 @@ public class CityRepositoryTest {
     @Test
     public void deleteCity() {
         cityRepository.addCity(new City("TestCity2", "SPB", "SPB", 1, 2));
-        assertFalse(cityRepository.deleteCity("TestCity2"));
+        assertTrue(cityRepository.deleteCity("TestCity2"));
     }
 
     @Test

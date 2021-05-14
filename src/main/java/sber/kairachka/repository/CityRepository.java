@@ -15,8 +15,8 @@ public class CityRepository {
     public List<City> findAll() {
         List<City> cities = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM CITIES")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CITIES");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 City city = new City(
                         resultSet.getLong(1),
@@ -35,11 +35,13 @@ public class CityRepository {
 
     public boolean addCity(City city) {
         try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement()) {
-            statement.execute(
-                    "INSERT INTO CITIES(NAME, REGION, DISTRICT, POPULATION, FOUNDATION)" +
-                            "VALUES ('" + city.getName() + "' , '" + city.getRegion() + "' , '" + city.getDistrict() +
-                            "' , " + city.getPopulation() + " , " + city.getFoundation() + ");");
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO CITIES(NAME, REGION, DISTRICT, POPULATION, FOUNDATION) VALUES(?, ?, ?, ?, ?)")) {
+            preparedStatement.setString(1, city.getName());
+            preparedStatement.setString(2, city.getRegion());
+            preparedStatement.setString(3, city.getDistrict());
+            preparedStatement.setLong(4, city.getPopulation());
+            preparedStatement.setInt(5, city.getFoundation());
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -49,9 +51,10 @@ public class CityRepository {
 
     public boolean deleteCity(String name) {
         try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement();) {
-            if ((statement.executeUpdate("DELETE FROM CITIES WHERE NAME = '" + name + "';")) == 0) return true;
-            else return false;
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("DELETE FROM CITIES WHERE NAME  = ?")) {
+            preparedStatement.setString(1, name);
+            return (preparedStatement.executeUpdate()) == 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -59,17 +62,24 @@ public class CityRepository {
     }
 
     public boolean editCity(String name, City city) {
-        String SQL = "UPDATE CITIES\n" +
-                "        SET\n" +
-                "        NAME = '" + city.getName() + "',\n" +
-                "        REGION = '" + city.getRegion() + "',\n" +
-                "        DISTRICT = '" + city.getDistrict() + "',\n" +
-                "        POPULATION = " + city.getPopulation() + ",\n" +
-                "        FOUNDATION = " + city.getFoundation() + "\n" +
-                "        WHERE NAME = '" + name + "';";
+//        String SQL = "UPDATE CITIES\n" +
+//                "        SET\n" +
+//                "        NAME = '" + city.getName() + "',\n" +
+//                "        REGION = '" + city.getRegion() + "',\n" +
+//                "        DISTRICT = '" + city.getDistrict() + "',\n" +
+//                "        POPULATION = " + city.getPopulation() + ",\n" +
+//                "        FOUNDATION = " + city.getFoundation() + "\n" +
+//                "        WHERE NAME = '" + name + "';";
         try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement()) {
-            return statement.executeUpdate(SQL) != 0;
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE CITIES SET " +
+                     "NAME = ?, REGION = ?, DISTRICT = ?, POPULATION = ?, FOUNDATION = ? WHERE NAME = ?")) {
+            preparedStatement.setString(1, city.getName());
+            preparedStatement.setString(2, city.getRegion());
+            preparedStatement.setString(3, city.getDistrict());
+            preparedStatement.setLong(4, city.getPopulation());
+            preparedStatement.setInt(5, city.getFoundation());
+            preparedStatement.setString(6, name);
+            return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

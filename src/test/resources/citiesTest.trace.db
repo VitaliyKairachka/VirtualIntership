@@ -1,0 +1,8 @@
+2021-05-14 09:20:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "CITIS" не найдена
+Table "CITIS" not found; SQL statement:
+DELETE FROM CITIS WHERE NAME  = ? [42102-200]
+2021-05-14 09:27:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "UPDATE CITIES SETNAME =[*] ?, REGION = ?, DISTRICT = ?, POPULATION = ?, FOUNDATION = ? WHERE NAME = ?"; ожидалось "SET"
+Syntax error in SQL statement "UPDATE CITIES SETNAME =[*] ?, REGION = ?, DISTRICT = ?, POPULATION = ?, FOUNDATION = ? WHERE NAME = ?"; expected "SET"; SQL statement:
+UPDATE CITIES SETNAME = ?, REGION = ?, DISTRICT = ?, POPULATION = ?, FOUNDATION = ? WHERE NAME = ? [42001-200]

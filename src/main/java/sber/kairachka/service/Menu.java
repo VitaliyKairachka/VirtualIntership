@@ -3,9 +3,7 @@ package sber.kairachka.service;
 import sber.kairachka.domain.City;
 import sber.kairachka.repository.CityRepository;
 
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Properties;
 import java.util.Scanner;
 
 public class Menu {
